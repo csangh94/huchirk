@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bbs">
+
+	<insert id="add" parameterType="replyDTO" >
+		insert into "REPLY2"
+		values(#{id},#{title},#{num},#{main},#{reply_id},#{pw},#{textarea},#{r_num})
+	</insert>
+	<insert id="bbs_insert" parameterType="bbsDTO" >
+		insert into "BBS"
+		values(#{id},#{title},#{content},#{main},#{num})
+	</insert>
+	<insert id="insert" parameterType="bbsDTO">
+		insert into "BBS"
+		values(#{id},#{title},#{content},#{main},#{num})
+	</insert>
+	<delete id="delete" parameterType="bbsDTO">
+		delete from "BBS" where
+		id=#{id} and num=#{num} and title=#{title} and main=#{main}
+	</delete>
+	<delete id="reply_delete" parameterType="bbsDTO">
+		delete from "REPLY2" where
+		id=#{id} and num=#{num} and title=#{title} and main=#{main}
+	</delete>
+	<delete id="reply_delete2" parameterType="replyDTO">
+		delete from "REPLY2" where
+		id=#{id} and num=#{num} and title=#{title} and main=#{main} and r_num=#{r_num} and reply_id=#{reply_id}
+	</delete>
+	<update id="update" parameterType="bbsDTO">
+		update "BBS" set
+		content=#{content} where id=#{id} and num=#{num} and title=#{title} and main=#{main}
+	</update>
+	<select id="select" resultType="bbsDTO">
+		select * from "BBS"
+	</select>
+	<select id="select2" parameterType="String" resultType="bbsDTO">
+		select *
+		from "BBS" where id=#{id} 
+	</select>
+	<select id="all" parameterType="String" resultType="bbsDTO">
+		select *
+		from "BBS" where main=#{main}
+	</select>
+	<select id="content" parameterType="bbsDTO" resultType="bbsDTO">
+		select *
+		from "BBS" where num=#{num} and title=#{title} and main=#{main}
+	</select>
+	<select id="reply_all" parameterType="replyDTO" resultType="replyDTO">
+		select *
+		from "REPLY2" where id=#{id} and num=#{num} and title=#{title} and main=#{main}
+	</select>
+</mapper>

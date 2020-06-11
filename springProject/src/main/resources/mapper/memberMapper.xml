@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member">
+
+	<select id="list" resultMap="rm">
+		select * from "member"
+	</select>
+
+	<!--  myBatis에서 가져옴 alias="memberDTO" -->
+	<select id="select" parameterType="memberDTO" resultType="memberDTO"> 
+		select * from "member" where id = #{id}
+	</select>
+	
+	<!-- record의 항목명과 dto의 멤버변수가 다른 경우  -->
+	<!-- orm object rdb mapping -->
+	<resultMap type="memberDTO" id="rm">
+	<result property="id" column="id"/>
+	<result property="pw" column="pw"/>
+	<result property="name" column="name"/>
+	<result property="tel" column="tel"/>
+	</resultMap>
+
+	<insert id="insert" parameterType="memberDTO">
+		insert into "member" values (#{id}, #{pw}, #{name}, #{tel})
+	</insert>
+	
+	<delete id="delete" parameterType="memberDTO">
+		delete from "member" where id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="memberDTO">
+		update "member" set pw = #{pw}, name = #{name}, tel = #{tel} where id = #{id}
+	</update>
+	
+	<select id="login" parameterType="memberDTO" resultType="memberDTO">
+		select * from "member"
+        where id = #{id} and pw=#{pw}
+	</select>
+	
+	<select id="idcheck" parameterType="memberDTO" resultType="memberDTO">
+		select * from "member" where id = #{id} 
+	</select>
+	
+</mapper>
