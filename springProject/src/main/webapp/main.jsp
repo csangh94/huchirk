@@ -25,7 +25,7 @@
 	<tr>
 		<td>${id} 님 환영합니다</td>
 		<td><form action="logout.do">
-				<button>로그아웃</button>
+				<button>로그아웃!</button>
 			</form>
 		</td>
 		<td><form action="mypage.jsp">
